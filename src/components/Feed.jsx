@@ -4,17 +4,17 @@ import { Box, Stack, Typography } from "@mui/material";
 import { fetchFromAPI } from "../utils/fetchFromAPI";
 import Sidebar from "./Sidebar";
 import Videos from "./Videos";
-import { SettingsInputSvideoSharp } from "@mui/icons-material";
 
 
 const Feed = () => {
 
   const [selectedCategory, setSelectedCategory] = useState('New');
-  const [videos, setVideos] = useState(null);
+  const [videos, setVideos] = useState();
 
   useEffect(() => {
-    fetchFromAPI(`search?part=snippet&q${selectedCategory}`)
-    .then((data) => SettingsInputSvideoSharp(data.items));
+    
+    fetchFromAPI(`search?part=snippet&q=${selectedCategory}`)
+    .then((data) => setVideos(data.items));
   },[selectedCategory]);
 
 
